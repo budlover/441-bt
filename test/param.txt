@@ -1,0 +1,1 @@
+./peer -m 4 -f ../test/C.chunks -p ../test/testnodes.map -c ../test/A.chunks -i 1

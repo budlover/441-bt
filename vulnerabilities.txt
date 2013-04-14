@@ -1,0 +1,4 @@
+1. Packets that fall in the sliding window will be accepted as valid packet,
+because lack of authentication. Although this could be correct by calculating
+the entire chunk hash at last and redownload the chunk, this could affect the 
+performance.

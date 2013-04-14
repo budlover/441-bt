@@ -1,0 +1,73 @@
+Please check the "test_case" folder, there are four test cases in it: test_case1, test_case2, test_case3 and test_case4. You can run nodes in each of these four folders.
+
+
+************************************************************
+test_case1
+Node A has noting
+./peer -m 4 -f M.chunks -p testnodes.map -c A.chunks -i 1
+
+Node B has chunks 2 & 3
+./peer -m 4 -f M.chunks -p testnodes.map -c B.chunks -i 2
+
+Node C has chunks 0 & 1
+./peer -m 4 -f M.chunks -p testnodes.map -c C.chunks -i 3
+
+On node A, input:
+GET get.chunks newA.tar
+
+topology:
+A----B
+|
+|
+|
+C
+
+************************************************************
+test_case2
+Node A has noting
+./peer -m 4 -f M.chunks -p testnodes.map -c A.chunks -i 1
+
+Node B and C have the all chunks: 0,1, 2 & 3
+./peer -m 4 -f M.chunks -p testnodes.map -c B.chunks -i 2
+./peer -m 4 -f M.chunks -p testnodes.map -c C.chunks -i 3
+
+On node A, input:
+GET get.chunks newA.tar
+
+You can see the concurrent transfer.
+
+topology:
+A-------B
+|
+|
+|
+C
+
+***********************************************************
+test_case3
+Node A has nothing
+./peer -m 4 -f M.chunks -p testnodes.map -c A.chunks -i 1 -d 0
+
+Node B and Node D have all chunks: 0, 1, 2 & 3
+./peer -m 4 -f M.chunks -p testnodes.map -c B.chunks -i 2 -d 0
+./peer -m 4 -f M.chunks -p testnodes.map -c D.chunks -i 4 -d 0
+
+Node C has nothing
+./peer -m 4 -f M.chunks -p testnodes.map -c C.chunks -i 3 -d 0
+
+On nodeA, input:
+GET get.chunks newA.tar
+
+topology:
+A----C----D
+|
+|
+|
+B
+
+The delay between A and D is lager than delay between A and B, so you will see B trasfers much faster than D.
+
+**********************************************************
+test_case4
+
+same with test_case1, but the bandwidth between A and B is larger than bandwidth between A and C, so you will see B transfers much faster than C.
